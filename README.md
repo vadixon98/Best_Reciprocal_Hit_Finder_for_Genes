@@ -79,7 +79,15 @@ Contains gene metadata and sequence lists:
 
 ## Contributing
 
-Contributions and issues are welcome! Please fork the repository, make your changes, and submit a pull request on GitHub.
+Contributions and issues are welcome! 🎉  
+Whether it's fixing a bug, improving documentation, or adding new features, your help is appreciated.
+
+### How to Contribute
+1. **Fork** the repository to your own GitHub account.  
+2. **Clone** your fork locally:  
+   ```bash
+   git clone https://github.com/your-username/your-repo-name.git
+## Contributing
 
 ---
 
