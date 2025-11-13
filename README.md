@@ -1,96 +1,250 @@
-# Best Reciprocal Hit (BRH) Finder for Gene Homology
+<div align="center">
 
-A Python-based toolset to identify **Best Reciprocal Hits (BRHs)** between genes from two species, using protein sequence similarity scored by the **BLOSUM62** substitution matrix and dynamic programming alignment.
+# 🧬 Best Reciprocal Hit (BRH) Finder for Genes
+
+### *Discover Orthologous Relationships Through Protein Sequence Alignment*
+
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+[![Bioinformatics](https://img.shields.io/badge/Bioinformatics-Comparative%20Genomics-orange)](https://github.com)
+[![Algorithm](https://img.shields.io/badge/Algorithm-Dynamic%20Programming-purple)](https://github.com)
+
+*A powerful Python toolset for identifying **Best Reciprocal Hits (BRHs)** between genes from different species using advanced sequence alignment algorithms.*
 
 ---
 
-## Requirements
+</div>
 
-* **Python 3.x**
-* No external dependencies (standard library only).
+## ✨ Features
+
+- 🎯 **Optimal Alignment Scoring** - Uses Needleman-Wunsch algorithm with BLOSUM62 substitution matrix
+- ⚡ **Performance Optimized** - Memoized dynamic programming for fast computation on large datasets
+- 🔄 **Reciprocal Hit Detection** - Identifies bidirectional best matches (true orthologs)
+- 📊 **Comprehensive Analysis** - Pairwise comparison between all genes from two species
+- 🧪 **Sample & Full Datasets** - Test on sample data or run full human vs. chicken analysis
+- 🎨 **Clean & Documented** - Well-commented code with clear function documentation
 
 ---
 
-## Installation
+## 🚀 Quick Start
 
-1. Clone or download the repository:
+### Prerequisites
 
+- **Python 3.8+** (recommended: Python 3.10+)
+- No external dependencies required! 🎉
+
+### Installation
+
+1. **Clone the repository:**
    ```bash
-   git clone <repository-url>
-   cd <repository-directory>
+   git clone https://github.com/your-username/Best_Reciprocal_Hit_Finder_for_Genes.git
+   cd Best_Reciprocal_Hit_Finder_for_Genes
    ```
-2. (Optional) Create and activate a virtual environment:
 
+2. **(Optional) Create a virtual environment:**
    ```bash
+   # Windows
+   python -m venv venv
+   venv\Scripts\activate
+   
+   # macOS/Linux
    python3 -m venv venv
-   source venv/bin/activate  # Windows: venv\Scripts\activate
+   source venv/bin/activate
    ```
+
+3. **You're ready to go!** No additional packages needed.
 
 ---
 
-## Scripts Overview
+## 📖 What is a Best Reciprocal Hit?
 
-### 1. `Best Reciprocal Hit Finder for Genes.py`
+A **Best Reciprocal Hit (BRH)** occurs when:
 
-Implements the core BRH workflow:
+> Gene A from species 1 matches most closely with Gene B from species 2  
+> **AND**  
+> Gene B from species 2 matches most closely with Gene A from species 1
 
-* `alignScore(seq1, seq2, gap, matrix)`: Recursive Needleman–Wunsch alignment score.
-* `memoAlignScore(seq1, seq2, gap, matrix, memo)`: Memoized version for speed.
-* `allScores(list1, list2)`: Compute pairwise alignment scores for two gene lists.
-* `closestMatch(gene, scoresDict)`: Identify the highest-scoring partner in the other species.
-* `printBRH(gene, scoresDict)`: Print BRH pairs when reciprocal.
-* `runBRHSample()`: Execute sample analysis on small predefined datasets.
-* `runBRH()`: Run full analysis on human vs. chicken datasets.
+This bidirectional relationship is a strong indicator of **orthology** — genes that descended from a common ancestral gene and typically retain similar functions across species.
 
-**Usage example**:
+```
+Species 1          Species 2
+  Gene A   ════════>   Gene B  (A's best match)
+  Gene A   <════════   Gene B  (B's best match)
+              ✓ BRH Found!
+```
+
+---
+
+## 📚 Scripts Overview
+
+### 🔬 Main Script: `Best Reciprocal Hit Finder for Genes.py`
+
+The core BRH analysis toolkit:
+
+| Function | Description | Use Case |
+|----------|-------------|----------|
+| `alignScore()` | Recursive Needleman–Wunsch alignment | Basic alignment scoring |
+| `memoAlignScore()` | **Memoized** alignment (faster!) | Large sequence datasets |
+| `allScores()` | Pairwise scores for all gene pairs | Build score matrix |
+| `closestMatch()` | Find highest-scoring partner | Identify best match |
+| `printBRH()` | Print reciprocal hit pairs | Display BRH results |
+| `runBRHSample()` | Run on sample datasets | Quick testing |
+| `runBRH()` | Full human vs. chicken analysis | Complete analysis |
+
+### 🗂️ Supporting Modules
+
+#### `blosum62.py`
+Provides the **BLOSUM62** substitution matrix as a Python dictionary for scoring amino acid substitutions during alignment.
+
+#### `humanChickenProteins.py`
+Contains gene metadata and sequence data:
+- `humanGeneList` / `chickenGeneList` → Full species datasets
+- `sampleHumanGeneList` / `sampleChickenGeneList` → Smaller test sets
+- `geneD` → Dictionary mapping gene IDs to protein sequences
+
+---
+
+## 💻 Usage Examples
+
+### Basic Usage: Sample Data
 
 ```python
-from Best_Reciprocal_Hit_Finder_for_Genes import runBRHSample
+from Best Reciprocal Hit Finder for Genes import runBRHSample
+
+# Run analysis on sample datasets
 runBRHSample()
 ```
 
-### 2. `blosum62.py`
+**Output:**
+```
+human --- chicken
+chr1 100000 GeneA --- chr2 50000 GeneX
+chr1 200000 GeneB --- chr5 75000 GeneY
+...
 
-Provides the **BLOSUM62** substitution matrix as a Python dictionary for scoring amino acid substitutions.
+chicken --- human
+chr2 50000 GeneX --- chr1 100000 GeneA
+...
+```
 
-### 3. `humanChickenProteins.py`
+### Full Dataset Analysis
 
-Contains gene metadata and sequence lists:
+```python
+from Best Reciprocal Hit Finder for Genes import runBRH
 
-* `humanGeneList` / `chickenGeneList`: Full species datasets.
-* `sampleHumanGeneList` / `sampleChickenGeneList`: Smaller test sets.
-* `geneD`: Dictionary with gene identifiers and corresponding protein sequences.
+# ⚠️ This may take considerable time for large datasets
+runBRH()
+```
+
+### Custom Alignment
+
+```python
+from Best Reciprocal Hit Finder for Genes import memoAlignScore, blosum62
+
+# Compute alignment score between two sequences
+memo = {}
+score = memoAlignScore(
+    sequence1="MKTAYIAKQRQISFVKSHFSRQLEERLGLIEVQAPILSRVGDGTQDNLSGAEKAVQVKVKALPDAQFEVVHSLAKWKRQTLGQHDFSAGEGLYTHMKALRPDEDRLSPLHSVYVDQWDWERVMGDGERQFSTLKSTVEAIWAGIKATEAAVSEEFGLAPFLPDQIHFVHSQELLSRYPDLDAKGRERAIAKDLGAVFLVGIGGKLSDGHRHDVRAPDYDDWSTPSELGHAGLNGDILVWNPVLEDAFELSSMGIRVDADTLKHQLALTGDEDRLELEWHQALLRGEMPQTIGGGIGQSRLTMLLLQLPHIGQVQAGVWPAAVRESVPSLL",
+    sequence2="MKTIIALSYIFCLVFAADPERKYLVEARARLERLGLIEVQAPILSRVGDGTQDNLSGAEKAVQVKVKALPDAQFEVVHSLAKWKRQTLGQHDFSAGEGLYTHMKALRPDEDRLSPLHSVYVDQWDWERVMGDGERQFSTLKSTVEAIWAGIKATEAAVSEEFGLAPFLPDQIHFVHSQELLSRYPDLDAKGRERAIAKDLGAVFLVGIGGKLSDGHRHDVRAPDYDDWSTPSELGHAGLNGDILVWNPVLEDAFELSSMGIRVDADTLKHQLALTGDEDRLELEWHQALLRGEMPQTIGGGIGQSRLTMLLLQLPHIGQVQAGVWPAAVRESVPSLL",
+    gap=-9,
+    substitutionMatrix=blosum62,
+    memo=memo
+)
+print(f"Alignment score: {score}")
+```
 
 ---
 
-## Usage Tips
+## ⚙️ Customization Tips
 
-* **Run full BRH analysis**:
+### 🔧 Adjust Gap Penalties
 
-  ```python
-  from Best_Reciprocal_Hit_Finder_for_Genes import runBRH
-  runBRH()
-  ```
-* **Adjust gap penalties** by passing a different `gap` value to `alignScore` or `memoAlignScore`.
-* **Optimize performance** by using the memoized alignment function for larger datasets.
-* **Customize datasets** by editing `humanChickenProteins.py` or supplying your own lists of sequences.
+```python
+# Default gap penalty is -9
+# You can modify it for different sensitivity
+score = memoAlignScore(seq1, seq2, gap=-10, substitutionMatrix=blosum62, memo={})
+```
+
+### 🚀 Performance Optimization
+
+- **Always use `memoAlignScore()`** for large datasets (much faster!)
+- The shared `memo` dictionary in `allScores()` reuses cached subproblem solutions
+- For very large analyses, consider batch processing or parallelization
+
+### 📝 Custom Datasets
+
+Modify `humanChickenProteins.py` or create your own gene lists:
+
+```python
+# Your custom gene lists
+mySpecies1Genes = ['Gene1', 'Gene2', 'Gene3']
+mySpecies2Genes = ['GeneA', 'GeneB', 'GeneC']
+
+# Compute all pairwise scores
+from Best Reciprocal Hit Finder for Genes import allScores, printBRH
+allScoresD = allScores(mySpecies1Genes, mySpecies2Genes)
+
+# Find BRHs
+for gene in mySpecies1Genes:
+    printBRH(gene, allScoresD)
+```
 
 ---
 
-## Contributing
+## 🧪 Algorithm Details
 
-Contributions and issues are welcome! 🎉  
-Whether it's fixing a bug, improving documentation, or adding new features, your help is appreciated.
+### Alignment Algorithm
+
+The tool uses the **Needleman-Wunsch** global alignment algorithm with three operations at each position:
+
+1. **Match/Mismatch** → Align two amino acids (scored by BLOSUM62)
+2. **Gap in Sequence 1** → Skip character in S1
+3. **Gap in Sequence 2** → Skip character in S2
+
+The algorithm recursively finds the optimal alignment by choosing the maximum score among these three options, with memoization to cache intermediate results for efficiency.
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Whether you're fixing bugs, improving documentation, or adding new features, your help makes this project better.
 
 ### How to Contribute
-1. **Fork** the repository to your own GitHub account.  
-2. **Clone** your fork locally:  
+
+1. **🍴 Fork** the repository to your GitHub account
+2. **📥 Clone** your fork locally:
    ```bash
-   git clone https://github.com/your-username/your-repo-name.git
-## Contributing
+   git clone https://github.com/your-username/Best_Reciprocal_Hit_Finder_for_Genes.git
+   ```
+3. **🌿 Create** a new branch for your changes:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+4. **✏️ Make** your changes and test them
+5. **📝 Commit** with clear messages:
+   ```bash
+   git commit -m "Add: description of your changes"
+   ```
+6. **🚀 Push** to your fork:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+7. **🔄 Submit** a Pull Request
 
 ---
 
-## License
+## 📄 License
 
-This project is released under the MIT License. Include a copy of the license if distributing.
+This project is released under the **MIT License**. See the license file for details.
+
+---
+
+<div align="center">
+
+### 🌟 Star this repo if you find it useful!
+
+**Made with ❤️ for the bioinformatics community**
+
+[⬆ Back to Top](#-best-reciprocal-hit-brh-finder-for-genes)
+
+</div>
