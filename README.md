@@ -172,19 +172,20 @@ score = memoAlignScore(seq1, seq2, gap=-10, substitutionMatrix=blosum62, memo={}
 
 ### Custom Datasets
 
-Modify `humanChickenProteins.py` or create your own gene lists:
+All genes must exist in `geneD` (from `humanChickenProteins.py`) with their protein sequences. Use a subset of the built-in genes, or add your own data to `humanChickenProteins.py` first.
 
 ```python
-# Your custom gene lists
-mySpecies1Genes = ['Gene1', 'Gene2', 'Gene3']
-mySpecies2Genes = ['GeneA', 'GeneB', 'GeneC']
-
-# Compute all pairwise scores
+# Use a subset of genes from the built-in dataset
+# All genes must exist in geneD
 from best_reciprocal_hit_finder import allScores, printBRH
-allScoresD = allScores(mySpecies1Genes, mySpecies2Genes)
 
-# Find BRHs
-for gene in mySpecies1Genes:
+# Subsets of the sample gene lists (h4, h6, c8, etc. are in geneD)
+myHumanGenes = ['h4', 'h6', 'h9']
+myChickenGenes = ['c8', 'c17', 'c19']
+
+allScoresD = allScores(myHumanGenes, myChickenGenes)
+
+for gene in myHumanGenes:
     printBRH(gene, allScoresD)
 ```
 

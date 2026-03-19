@@ -116,12 +116,20 @@ def allScores(geneList1, geneList2):
               Key format: (gene from list1, gene from list2)
               Value: alignment score (int)
     """
+    # Validate that all genes exist in geneD before proceeding
+    missing = [g for g in geneList1 + geneList2 if g not in geneD]
+    if missing:
+        raise ValueError(
+            f"Gene(s) not found in geneD: {missing}. "
+            "All genes must exist in geneD (from humanChickenProteins) with their protein sequences."
+        )
+
     # Dictionary to store alignment scores with (gene1, gene2) as keys
     scores = {}
     # Memoization dictionary shared across all alignments for efficiency
     # This allows reuse of subproblem solutions when aligning different gene pairs
     memo = {}
-    
+
     # Iterate through all pairs of genes from the two species
     for gene1 in geneList1:
         for gene2 in geneList2:
@@ -198,11 +206,17 @@ def printBRH(geneName, allScoresD):
     # Check if calling closestMatch on best_match returns geneName (reciprocal relationship)
     # This verifies that the match is bidirectional (BRH criteria)
     if best_match and closestMatch(best_match, allScoresD) == geneName:
+        # Verify both genes exist in geneD before accessing metadata
+        if geneName not in geneD or best_match not in geneD:
+            raise ValueError(
+                f"Cannot print BRH: gene(s) not found in geneD. "
+                f"Missing: {[g for g in (geneName, best_match) if g not in geneD]}"
+            )
         # Get gene information from geneD for both genes
         # geneD format: [chromosome, start_position, ?, protein_sequence]
         chromosome1, start1, a1, b1 = geneD[geneName]
         chromosome2, start2, a2, b2 = geneD[best_match]
-        
+
         # Print gene information for both species in format:
         # chromosome start_position gene_name --- chromosome start_position gene_name
         print(f"{chromosome1} {start1} {geneName} --- {chromosome2} {start2} {best_match}")
