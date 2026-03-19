@@ -1,37 +1,35 @@
 <div align="center">
 
-# 🧬 Best Reciprocal Hit (BRH) Finder for Genes
+# Best Reciprocal Hit (BRH) Finder for Genes
 
-### *Discover Orthologous Relationships Through Protein Sequence Alignment*
+*A Python tool for identifying Best Reciprocal Hits between genes from different species using protein sequence alignment and the BLOSUM62 substitution matrix.*
 
 [![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Bioinformatics](https://img.shields.io/badge/Bioinformatics-Comparative%20Genomics-orange)](https://github.com)
 [![Algorithm](https://img.shields.io/badge/Algorithm-Dynamic%20Programming-purple)](https://github.com)
 
-*A powerful Python toolset for identifying **Best Reciprocal Hits (BRHs)** between genes from different species using advanced sequence alignment algorithms.*
-
 ---
 
 </div>
 
-## ✨ Features
+## Features
 
-- 🎯 **Optimal Alignment Scoring** - Uses Needleman-Wunsch algorithm with BLOSUM62 substitution matrix
-- ⚡ **Performance Optimized** - Memoized dynamic programming for fast computation on large datasets
-- 🔄 **Reciprocal Hit Detection** - Identifies bidirectional best matches (true orthologs)
-- 📊 **Comprehensive Analysis** - Pairwise comparison between all genes from two species
-- 🧪 **Sample & Full Datasets** - Test on sample data or run full human vs. chicken analysis
-- 🎨 **Clean & Documented** - Well-commented code with clear function documentation
+- **Optimal Alignment Scoring** — Needleman–Wunsch algorithm with BLOSUM62 substitution matrix
+- **Performance Optimized** — Memoized dynamic programming for efficient computation on larger datasets
+- **Reciprocal Hit Detection** — Identifies bidirectional best matches (orthologs)
+- **Pairwise Analysis** — Compares all genes between two species
+- **Sample and Full Datasets** — Includes sample data for testing and full human vs. chicken datasets
+- **Documented Code** — Functions include docstrings and inline comments
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
-- **Python 3.8+** (recommended: Python 3.10+)
-- No external dependencies required! 🎉
+- Python 3.8+ (Python 3.10+ recommended)
+- Standard library only; no external dependencies
 
 ### Installation
 
@@ -52,11 +50,11 @@
    source venv/bin/activate
    ```
 
-3. **You're ready to go!** No additional packages needed.
+3. No additional packages are required.
 
 ---
 
-## 📖 What is a Best Reciprocal Hit?
+## What is a Best Reciprocal Hit?
 
 A **Best Reciprocal Hit (BRH)** occurs when:
 
@@ -70,28 +68,28 @@ This bidirectional relationship is a strong indicator of **orthology** — genes
 Species 1          Species 2
   Gene A   ════════>   Gene B  (A's best match)
   Gene A   <════════   Gene B  (B's best match)
-              ✓ BRH Found!
+              BRH
 ```
 
 ---
 
-## 📚 Scripts Overview
+## Scripts Overview
 
-### 🔬 Main Script: `Best Reciprocal Hit Finder for Genes.py`
+### Main Script: `Best Reciprocal Hit Finder for Genes.py`
 
 The core BRH analysis toolkit:
 
 | Function | Description | Use Case |
 |----------|-------------|----------|
 | `alignScore()` | Recursive Needleman–Wunsch alignment | Basic alignment scoring |
-| `memoAlignScore()` | **Memoized** alignment (faster!) | Large sequence datasets |
+| `memoAlignScore()` | Memoized alignment | Large sequence datasets |
 | `allScores()` | Pairwise scores for all gene pairs | Build score matrix |
 | `closestMatch()` | Find highest-scoring partner | Identify best match |
 | `printBRH()` | Print reciprocal hit pairs | Display BRH results |
 | `runBRHSample()` | Run on sample datasets | Quick testing |
 | `runBRH()` | Full human vs. chicken analysis | Complete analysis |
 
-### 🗂️ Supporting Modules
+### Supporting Modules
 
 #### `blosum62.py`
 Provides the **BLOSUM62** substitution matrix as a Python dictionary for scoring amino acid substitutions during alignment.
@@ -104,9 +102,9 @@ Contains gene metadata and sequence data:
 
 ---
 
-## 💻 Usage Examples
+## Usage Examples
 
-### Basic Usage: Sample Data
+### Sample Data
 
 ```python
 from Best Reciprocal Hit Finder for Genes import runBRHSample
@@ -155,9 +153,9 @@ print(f"Alignment score: {score}")
 
 ---
 
-## ⚙️ Customization Tips
+## Customization
 
-### 🔧 Adjust Gap Penalties
+### Gap Penalties
 
 ```python
 # Default gap penalty is -9
@@ -165,13 +163,13 @@ print(f"Alignment score: {score}")
 score = memoAlignScore(seq1, seq2, gap=-10, substitutionMatrix=blosum62, memo={})
 ```
 
-### 🚀 Performance Optimization
+### Performance
 
-- **Always use `memoAlignScore()`** for large datasets (much faster!)
+- Use `memoAlignScore()` for large datasets
 - The shared `memo` dictionary in `allScores()` reuses cached subproblem solutions
 - For very large analyses, consider batch processing or parallelization
 
-### 📝 Custom Datasets
+### Custom Datasets
 
 Modify `humanChickenProteins.py` or create your own gene lists:
 
@@ -191,9 +189,9 @@ for gene in mySpecies1Genes:
 
 ---
 
-## 🧪 Algorithm Details
+## Algorithm
 
-### Alignment Algorithm
+### Alignment
 
 The tool uses the **Needleman-Wunsch** global alignment algorithm with three operations at each position:
 
@@ -205,14 +203,12 @@ The algorithm recursively finds the optimal alignment by choosing the maximum sc
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
-We welcome contributions! Whether you're fixing bugs, improving documentation, or adding new features, your help makes this project better.
+Contributions are welcome. To contribute:
 
-### How to Contribute
-
-1. **🍴 Fork** the repository to your GitHub account
-2. **📥 Clone** your fork locally:
+1. Fork the repository
+2. Clone your fork locally:
    ```bash
    git clone https://github.com/your-username/Best_Reciprocal_Hit_Finder_for_Genes.git
    ```
