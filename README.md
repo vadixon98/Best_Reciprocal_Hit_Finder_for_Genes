@@ -212,35 +212,16 @@ Contributions are welcome. To contribute:
    ```bash
    git clone https://github.com/your-username/Best_Reciprocal_Hit_Finder_for_Genes.git
    ```
-3. **🌿 Create** a new branch for your changes:
+3. Create a branch for your changes:
    ```bash
    git checkout -b feature/your-feature-name
    ```
-4. **✏️ Make** your changes and test them
-5. **📝 Commit** with clear messages:
-   ```bash
-   git commit -m "Add: description of your changes"
-   ```
-6. **🚀 Push** to your fork:
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-7. **🔄 Submit** a Pull Request
+4. Make your changes and test them
+5. Commit with clear messages
+6. Push to your fork and open a Pull Request
 
 ---
 
-## 📄 License
+## License
 
-This project is released under the **MIT License**. See the license file for details.
-
----
-
-<div align="center">
-
-### 🌟 Star this repo if you find it useful!
-
-**Made with ❤️ for the bioinformatics community**
-
-[⬆ Back to Top](#-best-reciprocal-hit-brh-finder-for-genes)
-
-</div>
+This project is released under the MIT License. See the license file for details.
