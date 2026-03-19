@@ -41,9 +41,9 @@ def alignScore(S1, S2, gap, substitutionMatrix):
         int: Maximum alignment score between the two sequences
     """
     # Base case: if S1 is empty, score is gap penalty times length of S2
-    if S1 == " ": return gap * len(S2)
+    if S1 == "": return gap * len(S2)
     # Base case: if S2 is empty, score is gap penalty times length of S1
-    elif S2 == " " : return gap * len(S1)
+    elif S2 == "": return gap * len(S1)
     else:
         # Option 1: Align first characters of both sequences (match/mismatch)
         option1 = substitutionMatrix[(S1[0], S2[0])] + alignScore(S1[1:], S2[1:], gap, substitutionMatrix)
@@ -226,7 +226,7 @@ def runBRHSample():
         printBRH(geneName, allScoresD)
     
     # Print separator line
-    print
+    print()
     
     # Print header and process chicken genes (in chromosome order)
     print('chicken --- human')
@@ -254,7 +254,7 @@ def runBRH():
         printBRH(geneName, allScoresD)
     
     # Print separator line
-    print
+    print()
     
     # Print header and process all chicken genes (in chromosome order)
     print('chicken --- human')
